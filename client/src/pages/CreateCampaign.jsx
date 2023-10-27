@@ -18,6 +18,10 @@ const CreateCampaign = () => {
     image: "",
   });
 
+  const handleFormFieldChange = (fieldName, event) => {
+    setForm({ ...form , [fieldName] : event.target.value })
+  }
+
   const handleSubmit = () => {};
 
   return (
@@ -40,20 +44,55 @@ const CreateCampaign = () => {
       >
         <div className="flex flex-wrap gap-[40px]">
           <FormField
-            labelName="Your Name"
+            labelName="Your Name *"
             placeholder="Insert your name"
             inputType="text"
             value={form.name}
-            handleChange={() => {}}
+            handleChange={(event) => {handleFormFieldChange('name', event)}}
           />
           <FormField
-            labelName="Campaign title"
+            labelName="Campaign title *"
             placeholder="Write a title"
             inputType="text"
-            value={form.name}
-            handleChange={() => {}}
+            value={form.title}
+            handleChange={(event) => {handleFormFieldChange('title', event)}}
           />
         </div>
+        <FormField
+            labelName="Story *"
+            placeholder="Write your story"
+            isTextArea
+            value={form.description}
+            handleChange={(event) => {handleFormFieldChange('description', event)}}
+          />
+          <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] rounded-[10px]">
+            <img src={money} alt="money" className="w-[40px] h-[40px] object-contain" />
+            <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">You will get 100% of the raised amount</h4>
+          </div>
+          <div className="flex flex-wrap gap-[40px]">
+          <FormField
+            labelName="Goal *"
+            placeholder="BSC 0.10"
+            inputType="text"
+            value={form.target}
+            handleChange={(event) => {handleFormFieldChange('target', event)}}
+          />
+          <FormField
+            labelName="End date *"
+            placeholder="End date"
+            inputType="date"
+            value={form.deadline}
+            handleChange={(event) => {handleFormFieldChange('deadline', event)}}
+          />
+          
+        </div>
+        <div className="flex justify-center items-center mt-[20px]">
+            <CustomButton
+            btnType="submit"
+            title="Submit new campaign"
+            styles="bg-[#1dc071]"
+            />
+          </div>
       </form>
     </div>
   );
