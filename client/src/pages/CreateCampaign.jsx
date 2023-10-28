@@ -22,7 +22,10 @@ const CreateCampaign = () => {
     setForm({ ...form , [fieldName] : event.target.value })
   }
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(form)
+  };
 
   return (
     <div
@@ -69,6 +72,7 @@ const CreateCampaign = () => {
             <img src={money} alt="money" className="w-[40px] h-[40px] object-contain" />
             <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">You will get 100% of the raised amount</h4>
           </div>
+          
           <div className="flex flex-wrap gap-[40px]">
           <FormField
             labelName="Goal *"
@@ -84,15 +88,22 @@ const CreateCampaign = () => {
             value={form.deadline}
             handleChange={(event) => {handleFormFieldChange('deadline', event)}}
           />
-          
-        </div>
-        <div className="flex justify-center items-center mt-[20px]">
+          <FormField
+            labelName="Campaign Image *"
+            placeholder="Place image URL of your campaign"
+            inputType="url"
+            value={form.image}
+            handleChange={(event) => {handleFormFieldChange('image', event)}}
+          />
+          </div>
+          <div className="flex justify-center items-center mt-[40px]">
             <CustomButton
             btnType="submit"
             title="Submit new campaign"
             styles="bg-[#1dc071]"
             />
           </div>
+        
       </form>
     </div>
   );

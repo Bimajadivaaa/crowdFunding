@@ -24,6 +24,7 @@ module.exports = {
       bscTestnet: {
         url: "https://bsc-testnet.publicnode.com",
         accounts : [`0x${process.env.PRIVATE_KEY}`],
+        chainId : 97,
       }
     },
     settings: {
