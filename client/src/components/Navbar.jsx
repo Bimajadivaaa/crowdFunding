@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const {connect, address} = useStateContext();
+  
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -107,9 +108,9 @@ const Navbar = () => {
               handleClick={() => {
                 if (address) navigate("create-campaign");
                 else connect();
-                
               }}
             />
+            
           </div>
         </div>
       </div>

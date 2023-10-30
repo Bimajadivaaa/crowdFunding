@@ -32,7 +32,6 @@ export const StateContextProvider = ({ children }) => {
           form.target,
           new Date(form.deadline).getTime(),
           form.image,
-          amountCollected
         ],
       });
       console.log("contract call success", data);
@@ -41,6 +40,27 @@ export const StateContextProvider = ({ children }) => {
     }
   };
  
+  // async function publishCampaign({
+  //   title,
+  //   description,
+  //   target,
+  //   deadline,
+  //   image,
+  // }) {
+  //   try {
+  //     const data = await createCampaign([
+  //       address,
+  //       title,
+  //       description,
+  //       target,
+  //       new Date(deadline).getTime(),
+  //       image,
+  //     ])
+  //     console.log("sukses", data)
+  //   } catch (error) {
+  //     console.log("error")
+  //   }
+  // }
   return (
     <StateContext.Provider
       value={{ 
