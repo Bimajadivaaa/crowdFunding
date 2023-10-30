@@ -32,6 +32,7 @@ export const StateContextProvider = ({ children }) => {
           form.target,
           new Date(form.deadline).getTime(),
           form.image,
+          amountCollected
         ],
       });
       console.log("contract call success", data);
@@ -39,10 +40,14 @@ export const StateContextProvider = ({ children }) => {
       console.log("contract call failure", error);
     }
   };
-
+ 
   return (
     <StateContext.Provider
-      value={{ address, contract, createCampaign: publishCampaign }}
+      value={{ 
+        address, 
+        contract, 
+        connect, 
+        createCampaign: publishCampaign }}
     >
       {children}
     </StateContext.Provider>

@@ -8,9 +8,9 @@ import App from "./App";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+//clientId="b8b4817eb6c5e5d6db874841993bf056"
 root.render(
-  //  clientId="b8b4817eb6c5e5d6db874841993bf056"
+   
   <ThirdwebProvider activeChain="binance-testnet" desiredChainId={ChainId.BinanceSmartChainTestnet}>
     <Router>
       <StateContextProvider>

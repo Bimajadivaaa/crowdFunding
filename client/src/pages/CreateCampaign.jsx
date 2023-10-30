@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 
+import { useStateContext } from "../context";
 import { money } from "../assets";
 import { CustomButton, FormField } from "../components";
 import { checkIfImage } from "../utils";
@@ -9,6 +10,7 @@ import { checkIfImage } from "../utils";
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
     name: "",
     title: "",
@@ -19,12 +21,29 @@ const CreateCampaign = () => {
   });
 
   const handleFormFieldChange = (fieldName, event) => {
-    setForm({ ...form , [fieldName] : event.target.value })
-  }
+    setForm({ ...form, [fieldName]: event.target.value });
+  };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(form)
+
+    checkIfImage(form.image, async (exists) => {
+      if(exists){
+        setIsLoading(true)
+        await createCampaign({ 
+        ...form,
+        target: ethers.utils.parseUnits(form.target, 18),
+        })
+        setIsLoading(false)
+        navigate('/')
+      } else {
+        alert("Provide valid image URL");
+        setForm({
+        ... form,
+        image : ''})
+      }
+    })
+    console.log(form);
   };
 
   return (
@@ -51,59 +70,76 @@ const CreateCampaign = () => {
             placeholder="Insert your name"
             inputType="text"
             value={form.name}
-            handleChange={(event) => {handleFormFieldChange('name', event)}}
+            handleChange={(event) => {
+              handleFormFieldChange("name", event);
+            }}
           />
           <FormField
             labelName="Campaign title *"
             placeholder="Write a title"
             inputType="text"
             value={form.title}
-            handleChange={(event) => {handleFormFieldChange('title', event)}}
+            handleChange={(event) => {
+              handleFormFieldChange("title", event);
+            }}
           />
         </div>
         <FormField
-            labelName="Story *"
-            placeholder="Write your story"
-            isTextArea
-            value={form.description}
-            handleChange={(event) => {handleFormFieldChange('description', event)}}
+          labelName="Story *"
+          placeholder="Write your story"
+          isTextArea
+          value={form.description}
+          handleChange={(event) => {
+            handleFormFieldChange("description", event);
+          }}
+        />
+        <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] rounded-[10px]">
+          <img
+            src={money}
+            alt="money"
+            className="w-[40px] h-[40px] object-contain"
           />
-          <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] rounded-[10px]">
-            <img src={money} alt="money" className="w-[40px] h-[40px] object-contain" />
-            <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">You will get 100% of the raised amount</h4>
-          </div>
-          
-          <div className="flex flex-wrap gap-[40px]">
+          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">
+            You will get 100% of the raised amount
+          </h4>
+        </div>
+
+        <div className="flex flex-wrap gap-[40px]">
           <FormField
             labelName="Goal *"
             placeholder="BSC 0.10"
             inputType="text"
             value={form.target}
-            handleChange={(event) => {handleFormFieldChange('target', event)}}
+            handleChange={(event) => {
+              handleFormFieldChange("target", event);
+            }}
           />
           <FormField
             labelName="End date *"
             placeholder="End date"
             inputType="date"
             value={form.deadline}
-            handleChange={(event) => {handleFormFieldChange('deadline', event)}}
+            handleChange={(event) => {
+              handleFormFieldChange("deadline", event);
+            }}
           />
           <FormField
             labelName="Campaign Image *"
             placeholder="Place image URL of your campaign"
             inputType="url"
             value={form.image}
-            handleChange={(event) => {handleFormFieldChange('image', event)}}
+            handleChange={(event) => {
+              handleFormFieldChange("image", event);
+            }}
           />
-          </div>
-          <div className="flex justify-center items-center mt-[40px]">
-            <CustomButton
+        </div>
+        <div className="flex justify-center items-center mt-[40px]">
+          <CustomButton
             btnType="submit"
             title="Submit new campaign"
             styles="bg-[#1dc071]"
-            />
-          </div>
-        
+          />
+        </div>
       </form>
     </div>
   );
