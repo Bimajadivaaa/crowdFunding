@@ -12,12 +12,12 @@ const CreateCampaign = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
-    name: "",
-    title: "",
-    description: "",
-    target: "",
-    deadline: "",
-    image: "",
+    name: '',
+    title: '',
+    description: '',
+    target: '',
+    deadline: '',
+    image: '',
   });
 
   const handleFormFieldChange = (fieldName, event) => {
@@ -121,6 +121,7 @@ const CreateCampaign = () => {
               handleFormFieldChange("deadline", event);
             }}
           />
+          </div>
           <FormField
             labelName="Campaign Image *"
             placeholder="Place image URL of your campaign"
@@ -130,7 +131,6 @@ const CreateCampaign = () => {
               handleFormFieldChange("image", event);
             }}
           />
-        </div>
         <div className="flex justify-center items-center mt-[40px]">
           <CustomButton
             btnType="submit"

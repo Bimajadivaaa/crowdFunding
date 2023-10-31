@@ -29,38 +29,17 @@ export const StateContextProvider = ({ children }) => {
           address,
           form.title,
           form.description,
-          form.target,
+          form.target.toString(),
           new Date(form.deadline).getTime(),
+          0,
           form.image,
-        ],
-      });
+        ]});
       console.log("contract call success", data);
     } catch (error) {
       console.log("contract call failure", error);
     }
   };
  
-  // async function publishCampaign({
-  //   title,
-  //   description,
-  //   target,
-  //   deadline,
-  //   image,
-  // }) {
-  //   try {
-  //     const data = await createCampaign([
-  //       address,
-  //       title,
-  //       description,
-  //       target,
-  //       new Date(deadline).getTime(),
-  //       image,
-  //     ])
-  //     console.log("sukses", data)
-  //   } catch (error) {
-  //     console.log("error")
-  //   }
-  // }
   return (
     <StateContext.Provider
       value={{ 
