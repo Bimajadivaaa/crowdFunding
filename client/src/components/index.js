@@ -4,3 +4,4 @@ export { default as CustomButton } from "./CustomButton";
 export { default as FormField } from "./FormField";
 export { default as DisplayCampaign } from "./DisplayCampaign";
 export { default as FundCard } from "./FundCard.jsx";
+export { default as CountBox } from "./CountBox";
