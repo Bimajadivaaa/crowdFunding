@@ -14,8 +14,7 @@ root.render(
   <ThirdwebProvider
     activeChain="binance-testnet"
     desiredChainId={ChainId.BinanceSmartChainTestnet}
-    clientId="b8b4817eb6c5e5d6db874841993bf056"
-  >
+    clientId="b8b4817eb6c5e5d6db874841993bf056">
     <Router>
       <StateContextProvider>
         <App />
